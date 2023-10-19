@@ -2,31 +2,27 @@ import java.util.*;
 import java.io.*;
 
 public class Driver{
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) {
         HashMap map = new HashMap();
         Scanner scan = new Scanner(System.in);
 
         //reading UPC.CSV
-        try(BufferedReader reader = new BufferedReader(new FileReader("Hashes/Lab7inputFiles/UPC.csv"))){
+        try (BufferedReader br = new BufferedReader(new FileReader("UPC.csv"))) {
             String line;
-            while((line = reader.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if(parts.length >= 2){
-                    int key = Integer.parseInt(parts[0]);
-                    String desc = parts[2];
-                    map.put(key, desc);         //PUT
-                }
-            }
-            reader.close();
+                int key = Integer.parseInt(parts[0]);
+                String value = parts[2];
 
-        } catch(IOException e){
-            System.out.println("Error reading CSV file: " + e.getMessage());
+                map.put(key, value);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         //User input, allow for testing
         boolean done = false;
         while(!done){
-
             //Give Options
             System.out.println("\n=============================================================================================");
             System.out.println("* Please enter what you would like to do with the Hash Map: Enter A/B");
@@ -53,6 +49,7 @@ public class Driver{
             //exiting program
             else if(input.equalsIgnoreCase("C")){
                 System.out.println("* Alright, Goodbye!");
+                scan.close();
                 done = true;
             }
             //if the user inputs an invalid input 
