@@ -7,16 +7,20 @@ public class Driver{
         Scanner scan = new Scanner(System.in);
 
         //reading UPC.CSV
-        try (BufferedReader br = new BufferedReader(new FileReader("UPC.csv"))) {
+        int count = 1;
+        try(BufferedReader br = new BufferedReader(new FileReader("UPC.csv"))){
             String line;
-            while ((line = br.readLine()) != null) {
+            while((line = br.readLine()) != null){
+                System.out.println(count);
+                count++;
                 String[] parts = line.split(",");
                 int key = Integer.parseInt(parts[0]);
-                String value = parts[2];
-
-                map.put(key, value);
+                String desc = parts[2];
+                map.put(key, desc);  
             }
-        } catch (IOException e) {
+            
+
+        } catch(IOException e){
             e.printStackTrace();
         }
 
